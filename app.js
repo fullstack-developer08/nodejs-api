@@ -57,6 +57,4 @@ mongoose.connection.on('error', err => {
     console.log('error while creating to the mongo app', err);
 });
 
-app.listen('3000', () => {
-    console.log('server is running on 3000 port');
-});
+app.listen('3000', 'api.way2programming.com');
