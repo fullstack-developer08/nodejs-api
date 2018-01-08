@@ -57,4 +57,4 @@ mongoose.connection.on('error', err => {
     console.log('error while creating to the mongo app', err);
 });
 
-app.listen('3000', 'api.way2programming.com');
+app.listen('3000', '166.62.25.170');
