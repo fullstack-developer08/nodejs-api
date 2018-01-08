@@ -1,60 +1,65 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
-app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+app.get('', (req, res) => {
+    res.send('test');
+})
+app.listen('3000', 'api.way2programming.com');
+// app.use(function (req, res, next) {
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     // Website you wish to allow to connect
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//     // Request methods you wish to allow
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+//     // Request headers you wish to allow
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-    // Pass to next layer of middleware
-    next();
-});
+//     // Set to true if you need the website to include cookies in the requests sent
+//     // to the API (e.g. in case you use sessions)
+//     res.setHeader('Access-Control-Allow-Credentials', true);
 
-const routes = require('./routes/index');
+//     // Pass to next layer of middleware
+//     next();
+// });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/api', routes);
+// const routes = require('./routes/index');
 
-// Add headers
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use('/api', routes);
 
-const mongoose = require('mongoose');
-const Company = require('./models/company.model');
+// // Add headers
 
-const MONGO_DB_URI = 'mongodb://arifkhan08:khanarif08@ds135777.mlab.com:35777/arif123';
+// const mongoose = require('mongoose');
+// const Company = require('./models/company.model');
 
-var options = {
-    "server": {
-        "socketOptions": {
-            "keepAlive": 300000,
-            "connectTimeoutMS": 30000
-        }
-    },
-    "replset": {
-        "socketOptions": {
-            "keepAlive": 300000,
-            "connectTimeoutMS": 30000
-        }
-    }
-}
-mongoose.connect(MONGO_DB_URI, options);
+// const MONGO_DB_URI = 'mongodb://arifkhan08:khanarif08@ds135777.mlab.com:35777/arif123';
 
-mongoose.connection.on('connected', () => {
-    console.log('app is connected to the mongodb', MONGO_DB_URI);
-});
+// var options = {
+//     "server": {
+//         "socketOptions": {
+//             "keepAlive": 300000,
+//             "connectTimeoutMS": 30000
+//         }
+//     },
+//     "replset": {
+//         "socketOptions": {
+//             "keepAlive": 300000,
+//             "connectTimeoutMS": 30000
+//         }
+//     }
+// }
+// mongoose.connect(MONGO_DB_URI, options);
 
-mongoose.connection.on('error', err => {
-    console.log('error while creating to the mongo app', err);
-});
+// mongoose.connection.on('connected', () => {
+//     console.log('app is connected to the mongodb', MONGO_DB_URI);
+// });
 
-app.listen('3000', '166.62.25.170');
+// mongoose.connection.on('error', err => {
+//     console.log('error while creating to the mongo app', err);
+// });
+
+//
