@@ -16,20 +16,6 @@ const server = http.createServer((request, response) => {
   response.end('<html><body><h1>Hello, World!</h1></body></html>');
 })
 
-terminus(server, {
-  // healtcheck options
-  healthChecks: {
-    '/healthcheck': check          // a promise returning function indicating service health
-  },
 
-  // cleanup options
-  timeout: 1000,                   // [optional = 5000] number of milliseconds before forcefull exiting
-  signal,                          // [optional = 'SIGTERM'] what signal to listen for relative to shutdown
-  onSignal,                        // [optional] cleanup function, returning a promise (used to be onSigterm)
-  onShutdown,                      // [optional] called right before exiting
-
-  // both
-  logger                           // [optional] logger function to be called with errors
-});
 
 server.listen('3000', 'api.way2programming.com');
