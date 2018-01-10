@@ -2,7 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
 
-app.get('', (req, res) => {
+app.get('/test', (req, res) => {
     res.send('test');
 })
 app.listen('3000', 'api.way2programming.com');
