@@ -6,6 +6,7 @@ app.get('', (req, res) => {
     res.send('test');
 })
 app.listen('3000', 'api.way2programming.com');
+console.log('running');
 // app.use(function (req, res, next) {
 
 //     // Website you wish to allow to connect
