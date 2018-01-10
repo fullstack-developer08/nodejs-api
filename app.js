@@ -1,66 +1,35 @@
-const express = require('express');
-var bodyParser = require('body-parser');
-const app = express();
+const http = require('http');
+const terminus = require('@godaddy/terminus');
 
-app.get('/test', (req, res) => {
-    res.send('test');
+function onSignal () {
+  console.log('server is starting cleanup');
+  return Promise.all([
+    // your clean logic, like closing database connections
+  ]);
+}
+
+function onShutdown () {
+  console.log('cleanup finished, server is shutting down');
+}
+
+const server = http.createServer((request, response) => {
+  response.end('<html><body><h1>Hello, World!</h1></body></html>');
 })
-app.listen('3000', 'api.way2programming.com');
-console.log('running');
-// app.use(function (req, res, next) {
 
-//     // Website you wish to allow to connect
-//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+terminus(server, {
+  // healtcheck options
+  healthChecks: {
+    '/healthcheck': check          // a promise returning function indicating service health
+  },
 
-//     // Request methods you wish to allow
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  // cleanup options
+  timeout: 1000,                   // [optional = 5000] number of milliseconds before forcefull exiting
+  signal,                          // [optional = 'SIGTERM'] what signal to listen for relative to shutdown
+  onSignal,                        // [optional] cleanup function, returning a promise (used to be onSigterm)
+  onShutdown,                      // [optional] called right before exiting
 
-//     // Request headers you wish to allow
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  // both
+  logger                           // [optional] logger function to be called with errors
+});
 
-//     // Set to true if you need the website to include cookies in the requests sent
-//     // to the API (e.g. in case you use sessions)
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-
-//     // Pass to next layer of middleware
-//     next();
-// });
-
-// const routes = require('./routes/index');
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use('/api', routes);
-
-// // Add headers
-
-// const mongoose = require('mongoose');
-// const Company = require('./models/company.model');
-
-// const MONGO_DB_URI = 'mongodb://arifkhan08:khanarif08@ds135777.mlab.com:35777/arif123';
-
-// var options = {
-//     "server": {
-//         "socketOptions": {
-//             "keepAlive": 300000,
-//             "connectTimeoutMS": 30000
-//         }
-//     },
-//     "replset": {
-//         "socketOptions": {
-//             "keepAlive": 300000,
-//             "connectTimeoutMS": 30000
-//         }
-//     }
-// }
-// mongoose.connect(MONGO_DB_URI, options);
-
-// mongoose.connection.on('connected', () => {
-//     console.log('app is connected to the mongodb', MONGO_DB_URI);
-// });
-
-// mongoose.connection.on('error', err => {
-//     console.log('error while creating to the mongo app', err);
-// });
-
-//
+server.listen('3000', 'api.way2programming.com');
