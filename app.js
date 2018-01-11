@@ -1,8 +1,4 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
-
-
+const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
 app.use(function (req, res, next) {
@@ -61,4 +57,6 @@ mongoose.connection.on('error', err => {
     console.log('error while creating to the mongo app', err);
 });
 
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen('3000', () => {
+    console.log('server is running on 3000 port');
+});
