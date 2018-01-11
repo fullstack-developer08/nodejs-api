@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 
-app.get('/test', (req, res) => {
+app.get('', (req, res) => {
     res.send('test');
 })
-app.listen('8080', 'api.way2programming.com');
+app.listen('https://sleepy-citadel-54178.herokuapp.com');
 console.log('running');
