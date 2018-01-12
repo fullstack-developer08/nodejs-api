@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const TodoSchema = new Schema({
     desc: String,
     priority: String,
-    isCompleted: Boolean
+    isCompleted: Boolean,
+    lastUpdated: Date
 });
 
 module.exports = mongoose.model('Todo', TodoSchema);
